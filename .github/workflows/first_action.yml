@@ -2,22 +2,40 @@
 name: Release NodeJs
 on: push
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3
-        with:
-          node-version: 17
       - name: Install dependencies
         run: npm ci
-      - run: npm init @eslint/config
       - name: Lint
         run: npm run lint      
 
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Test
+        run: npm run test     
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build     
+
   output:
+    needs: 
     runs-on: ubuntu-latest
     steps:
       - name: Output Gihub context
