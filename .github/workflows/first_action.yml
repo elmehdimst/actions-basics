@@ -2,16 +2,23 @@
 name: Release NodeJs
 on: push
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17
       - name: Install dependencies
         run: npm ci
-      - name: Run lint script
+      - name: Lint
         run: npm run lint
-
+      - name: Test
+        run: npm run test      
+      - name: Build
+        run: npm run build
 
   output:
     runs-on: ubuntu-latest
