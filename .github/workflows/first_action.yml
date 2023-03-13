@@ -34,16 +34,6 @@ jobs:
       - name: Build
         run: npm run build     
 
-name: Issue logs
-on: issues  
-jobs:
-  output:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Output Gihub context
-        run: echo "${{ toJSON(github) }}"
-
 
 
 
