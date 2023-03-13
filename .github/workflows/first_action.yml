@@ -8,7 +8,7 @@ jobs:
       - name: Get repository code
         uses: actions/checkout@v3
       - name: Setup Node.js environment
-        uses: actions/setup-node@v3.6.0
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - name: Install dependencies
@@ -19,4 +19,7 @@ jobs:
         run: npm test      
       - name: Build project
         run: npm build
+
+
+
 
