@@ -2,10 +2,21 @@
 name: first workflow
 on: push
 jobs:
-  one:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: print greeting
-        run: hostname
-
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.6.0
+        with:
+          node-version: 18
+      - name: Install dependencies
+        uses: npm ci
+      - name: Run lint script
+        run: npm lint
+      - name: Run test sripts
+        run: npm test      
+      - name: Build project
+        run: npm build
 
