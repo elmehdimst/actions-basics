@@ -2,7 +2,6 @@ name: Issue logs
 on: issues  
 jobs:
   output:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Output Gihub context
